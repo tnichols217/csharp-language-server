@@ -168,7 +168,10 @@ let resolveDefaultWorkspaceProps (targetFramework: string option) : Map<string, 
         | Some tfm -> props |> Map.add "TargetFramework" tfm
         | None -> props
 
-    Map.empty |> applyTargetFrameworkProp
+    Map.empty
+        |> applyTargetFrameworkProp
+        |> Map.add "Platform" "AnyCPU"
+        |> Map.add "PlatformTarget" "AnyCPU"
 
 let selectPreferredSolution (slnFiles: string list) : option<string> =
     let getProjectCount (slnPath: string) =
